@@ -1,0 +1,18 @@
+#Vergeet niet bij je Run-configuration ook juist dit profile te selecten ('dev'), anders dut ie het natuurlijk niet.
+#En als we dan toch bezig zijn wat extra logging aanzetten.
+
+#dit geeft je onder http://localhost:8080/actuator allemaal extra debug-info
+management.endpoints.web.exposure.include=*
+
+#SQL logging
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type=TRACE
+
+#Custom logging
+#logging.level.org.springframework.security=DEBUG
+#logging.level.nl.hu=DEBUG
+#logging.level.org.springframework.web.client.RestTemplate=DEBUG
+

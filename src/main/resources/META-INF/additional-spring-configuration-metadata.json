@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "thuusbezorgd.stockservice",
+      "type": "java.lang.String",
+      "description": "Description for thuusbezorgd.stockservice."
+  }
+] }
