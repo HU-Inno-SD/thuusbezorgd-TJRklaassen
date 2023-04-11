@@ -1,0 +1,27 @@
+#Een aantal settings om als developer bezig te kunnen, en niet direct je security gegevens github in te fietsen
+
+#1 => Maak een kopietje van deze file, zonder example
+#2 => https://github.com/settings/developers daar kun je een App aanmaken, en een clientid/secret ophalen om hier in te vullen
+spring.security.oauth2.client.registration.github.client-id=jouwid
+spring.security.oauth2.client.registration.github.client-secret=jouwsecret
+
+#Vergeet niet bij je Run-configuration ook juist dit profile te selecten ('dev'), anders dut ie het natuurlijk niet.
+
+#En als we dan toch bezig zijn wat extra logging aanzetten.
+
+#dit geeft je onder http://localhost:8080/actuator allemaal extra debug-info
+management.endpoints.web.exposure.include=*
+
+#SQL logging
+spring.session.jdbc.initialize-schema=always
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type=TRACE
+
+#Custom logging
+#logging.level.org.springframework.security=DEBUG
+#logging.level.nl.hu=DEBUG
+#logging.level.org.springframework.web.client.RestTemplate=DEBUG
+
