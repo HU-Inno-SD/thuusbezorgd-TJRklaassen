@@ -1,9 +1,9 @@
-package nl.hu.inno.thuusbezorgd;
+package nl.hu.inno.stock;
 
-import nl.hu.inno.thuusbezorgd.domain.Rider;
-import nl.hu.inno.thuusbezorgd.security.User;
 import nl.hu.inno.thuusbezorgd.domain.Dish;
 import nl.hu.inno.thuusbezorgd.domain.Ingredient;
+import nl.hu.inno.thuusbezorgd.domain.Rider;
+import nl.hu.inno.thuusbezorgd.security.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;

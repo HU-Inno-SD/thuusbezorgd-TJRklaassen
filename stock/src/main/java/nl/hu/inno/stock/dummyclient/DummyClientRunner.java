@@ -1,7 +1,6 @@
-package nl.hu.inno.thuusbezorgd.dummyclient;
+package nl.hu.inno.stock.dummyclient;
 
 import nl.hu.inno.thuusbezorgd.FakeTimeProvider;
-import nl.hu.inno.thuusbezorgd.data.DishRepository;
 import nl.hu.inno.thuusbezorgd.presentation.OrderController;
 import nl.hu.inno.thuusbezorgd.security.User;
 import nl.hu.inno.thuusbezorgd.security.UserRepository;

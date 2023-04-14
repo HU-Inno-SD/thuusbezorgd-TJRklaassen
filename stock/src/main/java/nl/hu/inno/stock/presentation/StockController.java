@@ -1,9 +1,8 @@
-package nl.hu.inno.thuusbezorgd.presentation;
-
-import nl.hu.inno.thuusbezorgd.data.IngredientRepository;
-import nl.hu.inno.thuusbezorgd.domain.Dish;
+package nl.hu.inno.stock.presentation;
 
 import nl.hu.inno.thuusbezorgd.data.DishRepository;
+import nl.hu.inno.thuusbezorgd.data.IngredientRepository;
+import nl.hu.inno.thuusbezorgd.domain.Dish;
 import nl.hu.inno.thuusbezorgd.domain.Ingredient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;

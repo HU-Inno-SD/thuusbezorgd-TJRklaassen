@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd;
+package nl.hu.inno.stock;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

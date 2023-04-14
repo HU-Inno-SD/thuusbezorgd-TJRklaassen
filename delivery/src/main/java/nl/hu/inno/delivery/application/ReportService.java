@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.application;
+package nl.hu.inno.delivery.application;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd;
+package nl.hu.inno.thuusbezorgd.orders;
 
 import java.time.LocalDateTime;
 

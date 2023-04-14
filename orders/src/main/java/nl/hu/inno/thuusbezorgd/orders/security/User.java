@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.security;
+package nl.hu.inno.thuusbezorgd.orders.security;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.domain;
+package nl.hu.inno.thuusbezorgd.orders.domain;
 
 public enum OrderStatus {
     Received,

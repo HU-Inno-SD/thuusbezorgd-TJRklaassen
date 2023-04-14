@@ -1,4 +1,4 @@
-package nl.hu.inno.stock;
+package nl.hu.inno.delivery;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Component
 @Primary
-public class FakeTimeProvider implements TimeProvider{
+public class FakeTimeProvider implements TimeProvider {
     private LocalDateTime now;
 
     public FakeTimeProvider(){

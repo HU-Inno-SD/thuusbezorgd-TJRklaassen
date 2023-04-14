@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.config;
+package nl.hu.inno.thuusbezorgd.orders.config;
 
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.models.Operation;

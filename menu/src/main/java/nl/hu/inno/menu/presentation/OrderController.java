@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.presentation;
+package nl.hu.inno.menu.presentation;
 
 import nl.hu.inno.thuusbezorgd.TimeProvider;
 import nl.hu.inno.thuusbezorgd.application.DeliveryService;

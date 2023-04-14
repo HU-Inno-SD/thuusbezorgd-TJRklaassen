@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd;
+package nl.hu.inno.stock;
 
 import java.time.LocalDateTime;
 

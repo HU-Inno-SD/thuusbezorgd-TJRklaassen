@@ -1,4 +1,4 @@
-package nl.hu.inno.stock;
+package nl.hu.inno.menu;
 
 import nl.hu.inno.thuusbezorgd.domain.Dish;
 import nl.hu.inno.thuusbezorgd.domain.Ingredient;

@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.config;
+package nl.hu.inno.menu.config;
 
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.models.Operation;

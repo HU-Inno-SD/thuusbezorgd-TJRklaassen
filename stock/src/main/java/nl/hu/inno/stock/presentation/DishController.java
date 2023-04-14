@@ -1,12 +1,11 @@
-package nl.hu.inno.thuusbezorgd.presentation;
+package nl.hu.inno.stock.presentation;
 
+import nl.hu.inno.thuusbezorgd.data.DishRepository;
 import nl.hu.inno.thuusbezorgd.data.ReviewRepository;
 import nl.hu.inno.thuusbezorgd.domain.Dish;
-import nl.hu.inno.thuusbezorgd.data.DishRepository;
 import nl.hu.inno.thuusbezorgd.domain.DishReview;
 import nl.hu.inno.thuusbezorgd.domain.ReviewRating;
 import nl.hu.inno.thuusbezorgd.security.User;
-import nl.hu.inno.thuusbezorgd.security.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;

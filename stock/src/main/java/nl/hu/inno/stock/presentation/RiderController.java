@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.presentation;
+package nl.hu.inno.stock.presentation;
 
 public class RiderController {
 }

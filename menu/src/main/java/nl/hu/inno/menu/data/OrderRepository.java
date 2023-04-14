@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.data;
+package nl.hu.inno.menu.data;
 
 import nl.hu.inno.thuusbezorgd.domain.Order;
 import nl.hu.inno.thuusbezorgd.security.User;

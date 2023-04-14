@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.data;
+package nl.hu.inno.delivery.data;
 
 import nl.hu.inno.thuusbezorgd.domain.Rider;
 import org.springframework.data.jpa.repository.JpaRepository;

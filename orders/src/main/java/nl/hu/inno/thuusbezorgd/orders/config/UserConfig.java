@@ -1,7 +1,7 @@
-package nl.hu.inno.thuusbezorgd.config;
+package nl.hu.inno.thuusbezorgd.orders.config;
 
-import nl.hu.inno.thuusbezorgd.security.UserRepository;
-import nl.hu.inno.thuusbezorgd.security.UserResolver;
+import nl.hu.inno.thuusbezorgd.orders.security.UserRepository;
+import nl.hu.inno.thuusbezorgd.orders.security.UserResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

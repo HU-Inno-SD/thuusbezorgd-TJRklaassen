@@ -1,15 +1,14 @@
-package nl.hu.inno.thuusbezorgd.presentation;
+package nl.hu.inno.stock.presentation;
 
 import nl.hu.inno.thuusbezorgd.application.DeliveryService;
 import nl.hu.inno.thuusbezorgd.data.DeliveryRepository;
 import nl.hu.inno.thuusbezorgd.data.ReviewRepository;
 import nl.hu.inno.thuusbezorgd.domain.*;
-
 import nl.hu.inno.thuusbezorgd.security.User;
-import nl.hu.inno.thuusbezorgd.security.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 

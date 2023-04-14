@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.dummyclient;
+package nl.hu.inno.menu.dummyclient;
 
 import nl.hu.inno.thuusbezorgd.FakeTimeProvider;
 import nl.hu.inno.thuusbezorgd.presentation.OrderController;

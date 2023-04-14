@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.config;
+package nl.hu.inno.stock.config;
 
 import nl.hu.inno.thuusbezorgd.security.UserRepository;
 import nl.hu.inno.thuusbezorgd.security.UserResolver;

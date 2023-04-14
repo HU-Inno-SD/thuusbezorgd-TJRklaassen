@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.domain;
+package nl.hu.inno.menu.domain;
 
 import nl.hu.inno.thuusbezorgd.security.User;
 

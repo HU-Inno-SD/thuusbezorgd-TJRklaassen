@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.config;
+package nl.hu.inno.delivery.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;

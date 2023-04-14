@@ -1,13 +1,11 @@
-package nl.hu.inno.thuusbezorgd.presentation;
+package nl.hu.inno.thuusbezorgd.orders.presentation;
 
-import nl.hu.inno.thuusbezorgd.TimeProvider;
-import nl.hu.inno.thuusbezorgd.application.DeliveryService;
-import nl.hu.inno.thuusbezorgd.application.ReportService;
-import nl.hu.inno.thuusbezorgd.domain.*;
-import nl.hu.inno.thuusbezorgd.data.DishRepository;
-import nl.hu.inno.thuusbezorgd.data.OrderRepository;
-import nl.hu.inno.thuusbezorgd.security.User;
-import nl.hu.inno.thuusbezorgd.security.UserRepository;
+import nl.hu.inno.thuusbezorgd.orders.TimeProvider;
+import nl.hu.inno.thuusbezorgd.orders.application.ReportService;
+import nl.hu.inno.thuusbezorgd.orders.data.OrderRepository;
+import nl.hu.inno.thuusbezorgd.orders.domain.*;
+import nl.hu.inno.thuusbezorgd.orders.security.User;
+import nl.hu.inno.thuusbezorgd.orders.security.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -42,43 +40,36 @@ public class OrderController {
         public DishDto(long id) {
             this(id, null);
         }
-
-        public DishDto(Dish d) {
-            this(d.getId(), d.getName());
-        }
     }
 
     public record OrderDto(AddressDto address, List<DishDto> dishes) {
     }
 
-    public record OrderResponseDto(AddressDto address, List<DishDto> dishes, OrderStatus status, String deliveryUrl) {
+    public record OrderResponseDto(AddressDto address, List<DishDto> dishes, OrderStatus status) {
         public static OrderResponseDto fromOrder(Order o) {
-            List<Dish> orderedDishes = o.getOrderedDishes();
-            List<DishDto> dtos = orderedDishes.stream().map(DishDto::new).collect(Collectors.toList());
+            List<OrderedDish> orderedDishes = o.getOrderedDishes();
 
-            return new OrderResponseDto(new AddressDto(o.getAddress()), dtos, o.getStatus(), String.format("/deliveries/%s", o.getDelivery().getId()));
+            // TODO: Message naar Menu service om DishDto's op te vragen op basis van de ID's
+            // Tijdelijk
+            List<DishDto> dtos = new ArrayList<DishDto>();
+            dtos.add(new DishDto(7L, "Burger"));
+            dtos.add(new DishDto(8L, "Vegaburger"));
+
+//            List<DishDto> dtos = orderedDishes.stream().map(DishDto::new).collect(Collectors.toList());
+
+            return new OrderResponseDto(new AddressDto(o.getAddress()), dtos, o.getStatus());
         }
     }
 
     private final OrderRepository orders;
-    private final DishRepository dishes;
     private final UserRepository users;
-    private final DeliveryService deliveries;
     private TimeProvider timeProvider;
     private ReportService reports;
 
 
-    public OrderController( //Dit begint al aardige constructor overinjection te worden!
-                            OrderRepository orders,
-                            DishRepository dishes,
-                            UserRepository users,
-                            DeliveryService deliveries,
-                            TimeProvider timeProvider,
-                            ReportService reports) {
+    public OrderController(OrderRepository orders, UserRepository users, TimeProvider timeProvider, ReportService reports) {
         this.orders = orders;
-        this.dishes = dishes;
         this.users = users;
-        this.deliveries = deliveries;
         this.timeProvider = timeProvider;
         this.reports = reports;
     }
@@ -113,8 +104,6 @@ public class OrderController {
         String nr = paramMap.getFirst("nr");
         String zip = paramMap.getFirst("zip");
 
-        //Todo: validate
-
         return placeOrder(user, new OrderDto(new AddressDto(street, nr, city, zip), orderedDishes));
     }
 
@@ -124,9 +113,11 @@ public class OrderController {
     public ResponseEntity<OrderResponseDto> placeOrder(User user, @RequestBody OrderDto newOrder) throws URISyntaxException {
         Order created = new Order(user, newOrder.address.toAddress());
         for (DishDto orderedDish : newOrder.dishes()) {
-            Optional<Dish> d = this.dishes.findById(orderedDish.id());
-            if (d.isPresent()) {
-                created.addDish(d.get());
+//            Optional<Dish> d = this.dishes.findById(orderedDish.id());
+            // TODO: Message menu service to see if dish is present
+
+            if (true /*d.isPresent()*/) {
+                created.addDish(orderedDish.id);
             } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                         "Dish %s %s not found".formatted(orderedDish.id(), orderedDish.name()));
@@ -136,8 +127,10 @@ public class OrderController {
         Order savedOrder = this.orders.save(created);
         savedOrder.process(this.timeProvider.now());
 
-        Delivery newDelivery = deliveries.scheduleDelivery(savedOrder);
-        savedOrder.setDelivery(newDelivery);
+        // TODO: Message Delivery service to initiate delivery
+
+//        Delivery newDelivery = deliveries.scheduleDelivery(savedOrder);
+//        savedOrder.setDelivery(newDelivery);
 
         return ResponseEntity
                 .created(new URI("/orders/%d".formatted(savedOrder.getId())))

@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd.application;
+package nl.hu.inno.thuusbezorgd.orders.application;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

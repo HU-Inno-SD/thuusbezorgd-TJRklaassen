@@ -1,4 +1,4 @@
-package nl.hu.inno.stock.application;
+package nl.hu.inno.menu.application;
 
 import nl.hu.inno.thuusbezorgd.data.DeliveryRepository;
 import nl.hu.inno.thuusbezorgd.data.RiderRepository;

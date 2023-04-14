@@ -1,4 +1,4 @@
-package nl.hu.inno.stock;
+package nl.hu.inno.delivery;
 
 import org.springframework.stereotype.Component;
 

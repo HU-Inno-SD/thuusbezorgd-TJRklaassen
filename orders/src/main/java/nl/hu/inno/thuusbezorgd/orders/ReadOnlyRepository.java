@@ -1,4 +1,4 @@
-package nl.hu.inno.thuusbezorgd;
+package nl.hu.inno.thuusbezorgd.orders;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;

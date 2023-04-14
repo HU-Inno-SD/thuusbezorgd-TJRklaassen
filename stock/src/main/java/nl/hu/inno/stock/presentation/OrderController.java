@@ -1,11 +1,11 @@
-package nl.hu.inno.thuusbezorgd.presentation;
+package nl.hu.inno.stock.presentation;
 
 import nl.hu.inno.thuusbezorgd.TimeProvider;
 import nl.hu.inno.thuusbezorgd.application.DeliveryService;
 import nl.hu.inno.thuusbezorgd.application.ReportService;
-import nl.hu.inno.thuusbezorgd.domain.*;
 import nl.hu.inno.thuusbezorgd.data.DishRepository;
 import nl.hu.inno.thuusbezorgd.data.OrderRepository;
+import nl.hu.inno.thuusbezorgd.domain.*;
 import nl.hu.inno.thuusbezorgd.security.User;
 import nl.hu.inno.thuusbezorgd.security.UserRepository;
 import org.springframework.http.HttpStatus;

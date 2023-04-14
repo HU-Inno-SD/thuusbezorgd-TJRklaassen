@@ -1,6 +1,5 @@
-package nl.hu.inno.thuusbezorgd.data;
+package nl.hu.inno.stock.data;
 
-import nl.hu.inno.thuusbezorgd.domain.Dish;
 import nl.hu.inno.thuusbezorgd.domain.Ingredient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
