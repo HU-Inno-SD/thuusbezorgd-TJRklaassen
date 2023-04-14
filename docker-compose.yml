@@ -1,37 +1,22 @@
 version: "3.9"
-services:  
-  rabbitmq:
+services:
+  rabbitmq_orders:
     restart: always
     image: rabbitmq:3-management
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5673:5672"
+      - "15673:15672"
     environment:
-      RABBITMQ_NODENAME: bep3-rabbitmq-node
-  mongodb:    
-    image: mongo
-    restart: always
-    ports:
-      - "27017:27017"
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8092:8081
-    environment:      
-      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/
-  pg:
+      RABBITMQ_NODENAME: orders-rabbitmq-node
+    volumes:
+      - ./development/rabbitmq/data/orders/:/var/lib/rabbitmq/
+  postgres_orders:
     image: postgres
     restart: always
-    ports: 
-      - 5432:5432
+    ports:
+      - "5433:5432"
     environment:
       POSTGRES_PASSWORD: 1q2w3e!
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    ports:
-      - 8091:80
-    environment:
-      PGADMIN_DEFAULT_EMAIL: student@hu.nl
-      PGADMIN_DEFAULT_PASSWORD: 1q2w3e!
+    volumes:
+      - ./development/postgres/data/orders:/var/lib/postgresql/data
+      - ./development/postgres/init/orders:/docker-entrypoint-initdb.d/
