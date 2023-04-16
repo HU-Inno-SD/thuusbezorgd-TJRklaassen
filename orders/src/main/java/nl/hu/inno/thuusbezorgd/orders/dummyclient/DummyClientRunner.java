@@ -38,7 +38,10 @@ public class DummyClientRunner {
                 .filter(p -> !p.getName().equals("admin")).toList();
 
         RestTemplateBuilder builder = new RestTemplateBuilder();
-        RestTemplate orderTemplate = builder.setReadTimeout(Duration.ofMillis(500)).build();
+        RestTemplate orderTemplate = builder
+                .setReadTimeout(Duration.ofMillis(10000))
+                .setConnectTimeout(Duration.ofMillis(10000))
+                .build();
 
         List<Thread> threads = new ArrayList<>();
         for (User user : allUsers) {
@@ -46,14 +49,14 @@ public class DummyClientRunner {
                 HttpHeaders headers = new HttpHeaders();
                 headers.set("Authentication-Hack", user.getName());
 
-                OrderController.OrderDto order = new OrderController.OrderDto(
+                OrderController.OrderDTO order = new OrderController.OrderDTO(
                         new OrderController.AddressDto("Somewhere" + user.getName(), "SomeNumber", "SomeCity", "SomeZip"),
                         List.of(
-                                new OrderController.DishDto(7L, "Burger"),
-                                new OrderController.DishDto(8L, "Vegaburger")
+                                new OrderController.DishDTO(1L, "Hamburger"),
+                                new OrderController.DishDTO(2L, "Vegaburger")
                         )
                 );
-                HttpEntity<OrderController.OrderDto> orderRequest = new HttpEntity<>(order, headers);
+                HttpEntity<OrderController.OrderDTO> orderRequest = new HttpEntity<>(order, headers);
 
 
                 ResponseEntity<OrderController.OrderResponseDto> resp =

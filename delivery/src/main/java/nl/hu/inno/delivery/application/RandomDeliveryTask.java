@@ -1,7 +1,7 @@
 package nl.hu.inno.delivery.application;
 
-import nl.hu.inno.thuusbezorgd.data.DeliveryRepository;
-import nl.hu.inno.thuusbezorgd.domain.Delivery;
+import nl.hu.inno.delivery.data.DeliveryRepository;
+import nl.hu.inno.delivery.domain.Delivery;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,8 @@ public class RandomDeliveryTask {
 
         if (delivery.isPresent()) {
             Delivery someDelivery = delivery.get();
-            someDelivery.getOrder().setStatus(someDelivery.getOrder().getStatus().next());
+            // TODO: stuff
+//            someDelivery.getOrder().setStatus(someDelivery.getOrder().getStatus().next());
         }
     }
 }

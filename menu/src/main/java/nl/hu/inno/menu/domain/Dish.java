@@ -1,10 +1,11 @@
 package nl.hu.inno.menu.domain;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import nl.hu.inno.menu.messaging.Messenger;
+
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Dish {
@@ -13,20 +14,21 @@ public class Dish {
     private Long id;
 
     private String name;
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Ingredient> ingredients;
+    @OneToMany(mappedBy = "dish", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<DishIngredient> dishIngredients;
 
     protected Dish() {
         //For Hibernate
     }
 
-    public Dish(String name, Ingredient... ingredients) {
-        if (ingredients.length == 0) {
-            throw new IllegalArgumentException("Cannot have 0 ingredients");
-        }
-
+    public Dish(String name) {
         this.name = name;
-        this.ingredients = Arrays.asList(ingredients);
+        this.dishIngredients = new ArrayList<DishIngredient>();
+    }
+
+    public Dish(String name, DishIngredient... dishIngredients) {
+        this.name = name;
+        this.dishIngredients = Arrays.asList(dishIngredients);
     }
 
     public Long getId() {
@@ -37,12 +39,18 @@ public class Dish {
         return name;
     }
 
-    public List<Ingredient> getIngredients() {
-        return Collections.unmodifiableList(ingredients);
+    public void addIngredients(DishIngredient... ingredients) {
+        dishIngredients.addAll(Arrays.asList(ingredients));
+    }
+
+    public List<DishIngredient> getDishIngredients() {
+        return dishIngredients;
     }
 
     public boolean isVegetarian() {
-        return this.ingredients.stream().allMatch(Ingredient::isVegetarian);
+        // TODO: Bij genoeg tijd dit nog via messaging doen
+//        return this.ingredients.stream().allMatch(Ingredient::isVegetarian);
+        return true;
     }
 
     @Override
@@ -58,13 +66,18 @@ public class Dish {
         return Objects.hash(id);
     }
 
-    public int getAvailable() {
-        return this.getIngredients().stream().mapToInt(Ingredient::getNrInStock).min().orElse(0);
-    }
-
-    public void prepare(){
-        for(Ingredient i: this.ingredients){
-            i.take(1);
-        }
-    }
+//    public int getAvailable() {
+//        // TODO: Dit via messaging doen
+//
+//
+////        return this.getIngredients().stream().mapToInt(Ingredient::getNrInStock).min().orElse(0);
+//        return 6;
+//    }
+//
+//    public void prepare(){
+//        // TODO: Via messaging doen
+////        for(Ingredient i: this.ingredients){
+////            i.take(1);
+////        }
+//    }
 }

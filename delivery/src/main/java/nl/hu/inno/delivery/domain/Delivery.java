@@ -1,6 +1,8 @@
 package nl.hu.inno.delivery.domain;
 
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +15,13 @@ public class Delivery {
 
     private boolean completed;
 
+    @ManyToOne
+    private Rider rider;
+
+    @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
+    private DeliveryOrder deliveryOrder;
+
     public Long getId() {
         return id;
     }
@@ -21,20 +30,14 @@ public class Delivery {
         return rider;
     }
 
-    public Order getOrder() {
-        return order;
+    public DeliveryOrder getDeliveryOrder() {
+        return deliveryOrder;
     }
-
-    @ManyToOne
-    private Rider rider;
-
-    @ManyToOne
-    private Order order;
 
     protected Delivery(){}
 
-    public Delivery(Order order, Rider rider){
-        this.order = order;
+    public Delivery(DeliveryOrder deliveryOrder, Rider rider){
+        this.deliveryOrder = deliveryOrder;
         this.rider = rider;
     }
 
@@ -44,6 +47,7 @@ public class Delivery {
 
     public void markCompleted(){
         this.completed = true;
-        this.order.setStatus(OrderStatus.Delivered);
+        // TODO: Message to order to mark status
+//        this.deliveryOrder.setStatus(OrderStatus.Delivered);
     }
 }

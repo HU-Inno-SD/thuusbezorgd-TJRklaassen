@@ -1,15 +1,5 @@
 version: "3.9"
 services:
-  rabbitmq_orders:
-    restart: always
-    image: rabbitmq:3-management
-    ports:
-      - "5673:5672"
-      - "15673:15672"
-    environment:
-      RABBITMQ_NODENAME: orders-rabbitmq-node
-    volumes:
-      - ./development/rabbitmq/data/orders/:/var/lib/rabbitmq/
   postgres_orders:
     image: postgres
     restart: always
@@ -22,16 +12,6 @@ services:
     volumes:
       - ./development/postgres/data/orders:/var/lib/postgresql/data
       - ./development/postgres/init/orders:/docker-entrypoint-initdb.d/
-  rabbitmq_menu:
-    restart: always
-    image: rabbitmq:3-management
-    ports:
-      - "5674:5672"
-      - "15674:15672"
-    environment:
-      RABBITMQ_NODENAME: menu-rabbitmq-node
-    volumes:
-      - ./development/rabbitmq/data/menu/:/var/lib/rabbitmq/
   postgres_menu:
     image: postgres
     restart: always
@@ -39,9 +19,45 @@ services:
       - "5434:5432"
     environment:
       POSTGRES_PASSWORD: 1q2w3e!
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
     volumes:
       - ./development/postgres/data/menu:/var/lib/postgresql/data
       - ./development/postgres/init/menu:/docker-entrypoint-initdb.d/
+  postgres_stock:
+    image: postgres
+    restart: always
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_PASSWORD: 1q2w3e!
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./development/postgres/data/stock:/var/lib/postgresql/data
+      - ./development/postgres/init/stock:/docker-entrypoint-initdb.d/
+  postgres_delivery:
+    image: postgres
+    restart: always
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_PASSWORD: 1q2w3e!
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./development/postgres/data/delivery:/var/lib/postgresql/data
+      - ./development/postgres/init/delivery:/docker-entrypoint-initdb.d/
+  rabbitmq:
+    restart: always
+    image: rabbitmq:3-management
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    environment:
+      RABBITMQ_NODENAME: menu-rabbitmq-node
+    volumes:
+      - ./development/rabbitmq/data/menu/:/var/lib/rabbitmq/
   pgadmin:
     image: dpage/pgadmin4
     restart: always

@@ -1,9 +1,7 @@
 package nl.hu.inno.stock;
 
-import nl.hu.inno.thuusbezorgd.domain.Dish;
-import nl.hu.inno.thuusbezorgd.domain.Ingredient;
-import nl.hu.inno.thuusbezorgd.domain.Rider;
-import nl.hu.inno.thuusbezorgd.security.User;
+import nl.hu.inno.stock.domain.Ingredient;
+import nl.hu.inno.stock.security.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -40,20 +38,8 @@ public class InitialDataRunner implements CommandLineRunner {
         for (Ingredient i : Arrays.asList(
                 broodje, burger, vegaburger, kaas, sla, tomaat
         )) {
-            i.deliver(10 * 1000);
+            i.deliver(20);
             entities.persist(i);
         }
-
-        for (Dish d : Arrays.asList(
-                new Dish("Burger", broodje, burger, kaas, sla, tomaat),
-                new Dish("Vegaburger", broodje, vegaburger, sla, tomaat),
-                new Dish("Salad", sla, tomaat),
-                new Dish("Croque Monsieur", broodje, kaas)
-        )) {
-            entities.persist(d);
-        }
-
-        Rider wynona = new Rider("Wynona");
-        entities.persist(wynona);
     }
 }

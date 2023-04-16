@@ -55,7 +55,7 @@ public class Ingredient {
 
     public void take(int n){
         if(n > this.nrInStock){
-            throw new RuntimeException("Out of stock: " + this.getName());
+            System.out.println("Out of stock: " + this.getName());
         }
         this.nrInStock -= n;
     }

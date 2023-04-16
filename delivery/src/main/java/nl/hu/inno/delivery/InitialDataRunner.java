@@ -1,16 +1,15 @@
 package nl.hu.inno.delivery;
 
-import nl.hu.inno.thuusbezorgd.domain.Dish;
-import nl.hu.inno.thuusbezorgd.domain.Ingredient;
-import nl.hu.inno.thuusbezorgd.domain.Rider;
-import nl.hu.inno.thuusbezorgd.security.User;
+import nl.hu.inno.delivery.domain.Delivery;
+import nl.hu.inno.delivery.domain.DeliveryOrder;
+import nl.hu.inno.delivery.domain.Rider;
+import nl.hu.inno.delivery.security.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.util.Arrays;
 
 @Component
 @Profile("dev")
@@ -30,30 +29,13 @@ public class InitialDataRunner implements CommandLineRunner {
         this.entities.persist(new User("mirko", "Mirko456"));
         this.entities.persist(new User("robin", "0fir%%cQJ|Rc!!=&fIKsRI"));
 
-        Ingredient broodje = new Ingredient("Bun", true);
-        Ingredient burger = new Ingredient("Burger", false);
-        Ingredient vegaburger = new Ingredient("Vegaburger", true);
-        Ingredient kaas = new Ingredient("Cheese", false);
-        Ingredient sla = new Ingredient("Lettuce", true);
-        Ingredient tomaat = new Ingredient("Tomato", true);
-
-        for (Ingredient i : Arrays.asList(
-                broodje, burger, vegaburger, kaas, sla, tomaat
-        )) {
-            i.deliver(10 * 1000);
-            entities.persist(i);
-        }
-
-        for (Dish d : Arrays.asList(
-                new Dish("Burger", broodje, burger, kaas, sla, tomaat),
-                new Dish("Vegaburger", broodje, vegaburger, sla, tomaat),
-                new Dish("Salad", sla, tomaat),
-                new Dish("Croque Monsieur", broodje, kaas)
-        )) {
-            entities.persist(d);
-        }
-
         Rider wynona = new Rider("Wynona");
         entities.persist(wynona);
+
+        DeliveryOrder deliveryOrder = new DeliveryOrder(1L);
+        Delivery delivery = new Delivery(deliveryOrder, wynona);
+        deliveryOrder.addDelivery(delivery);
+
+        entities.persist(delivery);
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -39,9 +40,9 @@ public class ReportService {
         ).getResultList();
 
         return ordersPerDay.stream().map(objs -> new OrdersPerDayDTO(
-                ((Double) objs[0]).intValue(),
-                ((Double) objs[1]).intValue(),
-                ((Double) objs[2]).intValue(),
+                ((BigDecimal) objs[0]).intValue(),
+                ((BigDecimal) objs[1]).intValue(),
+                ((BigDecimal) objs[2]).intValue(),
                 ((BigInteger) objs[3]).intValue()
         )).toList();
     }

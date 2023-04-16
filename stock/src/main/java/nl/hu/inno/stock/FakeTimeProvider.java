@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Component
 @Primary
-public class FakeTimeProvider implements TimeProvider{
+public class FakeTimeProvider implements TimeProvider {
     private LocalDateTime now;
 
     public FakeTimeProvider(){

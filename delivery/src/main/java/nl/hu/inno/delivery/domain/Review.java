@@ -1,6 +1,6 @@
 package nl.hu.inno.delivery.domain;
 
-import nl.hu.inno.thuusbezorgd.security.User;
+import nl.hu.inno.delivery.security.User;
 
 import javax.persistence.*;
 

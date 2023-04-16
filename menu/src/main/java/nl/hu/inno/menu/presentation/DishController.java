@@ -1,11 +1,15 @@
 package nl.hu.inno.menu.presentation;
 
-import nl.hu.inno.thuusbezorgd.data.DishRepository;
-import nl.hu.inno.thuusbezorgd.data.ReviewRepository;
-import nl.hu.inno.thuusbezorgd.domain.Dish;
-import nl.hu.inno.thuusbezorgd.domain.DishReview;
-import nl.hu.inno.thuusbezorgd.domain.ReviewRating;
-import nl.hu.inno.thuusbezorgd.security.User;
+import nl.hu.inno.menu.data.DishRepository;
+import nl.hu.inno.menu.data.ReviewRepository;
+import nl.hu.inno.menu.domain.Dish;
+import nl.hu.inno.menu.domain.DishReview;
+import nl.hu.inno.menu.domain.ReviewRating;
+import nl.hu.inno.menu.security.User;
+import nl.hu.inno.menu.dto.DishDTO;
+import nl.hu.inno.menu.dto.ReviewDTO;
+import nl.hu.inno.menu.dto.PostedReviewDTO;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -21,45 +25,27 @@ public class DishController {
     private final DishRepository dishes;
     private final ReviewRepository reviews;
 
-    public record DishDto(long id, String name, boolean available) {
-        public static DishDto fromDish(Dish d) {
-            return new DishDto(d.getId(), d.getName(), d.getAvailable() > 0);
-        }
-    }
-
     public DishController(DishRepository dishes, ReviewRepository reviews) {
         this.dishes = dishes;
         this.reviews = reviews;
     }
 
     @GetMapping
-    public List<DishDto> getDishes() {
+    public List<DishDTO> getDishes() {
         return this.dishes.findAll().stream()
-                .map(DishDto::fromDish)
+                .map(DishDTO::fromDish)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<DishDto> getDish(@PathVariable long id) {
+    public ResponseEntity<DishDTO> getDish(@PathVariable long id) {
         Optional<Dish> dishResult = this.dishes.findById(id);
         if (dishResult.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
-            return ResponseEntity.ok(DishDto.fromDish(dishResult.get()));
+            return ResponseEntity.ok(DishDTO.fromDish(dishResult.get()));
         }
     }
-
-
-    public record ReviewDTO(String dish, String reviewerName, int rating) {
-        public static ReviewDTO fromReview(DishReview review) {
-            return new ReviewDTO(review.getDish().getName(), review.getUser().getName(), review.getRating().toInt());
-        }
-    }
-
-    public record PostedReviewDTO(int rating) {
-
-    }
-
 
     @GetMapping("/{id}/reviews")
     public ResponseEntity<List<ReviewDTO>> getDishReviews(@PathVariable("id") long id) {

@@ -1,7 +1,7 @@
 package nl.hu.inno.menu.config;
 
-import nl.hu.inno.thuusbezorgd.security.UserRepository;
-import nl.hu.inno.thuusbezorgd.security.UserResolver;
+import nl.hu.inno.menu.security.UserRepository;
+import nl.hu.inno.menu.security.UserResolver;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
